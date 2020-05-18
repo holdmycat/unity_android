@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.elex.nextgp" android:installLocation="preferExternal" android:versionCode="1" android:versionName="1.0">
+  <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true" />
+  <application android:theme="@android:style/Theme.NoTitleBar" 
+	android:icon="@drawable/app_icon"
+	android:label="@string/app_name"
+	android:name="android.support.multidex.MultiDexApplication"
+	android:networkSecurityConfig="@xml/network_security_config">
+    <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="true" />
+    <activity android:name=".MainActivity" android:launchMode="singleInstance" android:screenOrientation="landscape" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+    </activity>
+    <!-- AIHelp添加start -->
+    <activity android:name="com.ljoy.chatbot.ChatMainActivity" android:configChanges="orientation|screenSize|locale" android:screenOrientation="sensor"></activity>
+    <activity android:name="com.ljoy.chatbot.FAQActivity" android:configChanges="orientation|screenSize|locale" android:screenOrientation="sensor" android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+      <intent-filter android:label="@string/app_name">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="https" android:host="cs30.net" android:pathPrefix="/elvaFAQ" />
+      </intent-filter>
+    </activity>
+    <activity android:name="com.ljoy.chatbot.OPActivity" android:configChanges="orientation|screenSize|locale" android:screenOrientation="sensor" android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+    <activity android:name="com.ljoy.chatbot.WebViewActivity" android:screenOrientation="sensor" android:configChanges="orientation|screenSize|locale" android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+      <intent-filter android:label="@string/app_name">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+      </intent-filter>
+    </activity>
+    <activity android:name="com.ljoy.chatbot.QAWebActivity" android:configChanges="orientation|screenSize|locale"></activity>
+    <!-- AIHelp添加end -->
+    <provider android:name="android.support.v4.content.FileProvider" android:exported="false" android:authorities="com.elex.nextgp.fileprovider" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+    </provider>
+    <!-- 游戏重启服务 -->
+    <service android:exported="true" android:name="com.relextech.android.RelexTechRestartService" android:process=":xg_service_v3" />
+    <!-- Appsflyer添加start -->
+    <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+      <intent-filter>
+        <action android:name="com.android.vending.INSTALL_REFERRER" />
+      </intent-filter>
+    </receiver>
+    <!-- Appsflyer添加end -->
+    <activity android:name="com.facebook.unity.FBUnityLoginActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+    <activity android:name="com.facebook.unity.FBUnityDialogsActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+    <activity android:name="com.facebook.unity.FBUnityAppLinkActivity" android:exported="true" />
+    <activity android:name="com.facebook.unity.FBUnityDeepLinkingActivity" android:exported="true" />
+    <activity android:name="com.facebook.unity.FBUnityGameRequestActivity" />
+    <activity android:name="com.facebook.unity.FBUnityCreateGameGroupActivity" />
+    <activity android:name="com.facebook.unity.FBUnityJoinGameGroupActivity" />
+    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="fb433755940728135" />
+    <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="true" />
+    <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="true" />
+    <provider android:name="com.facebook.FacebookContentProvider" android:authorities="com.facebook.app.FacebookContentProvider433755940728135" android:exported="true" />
+  </application>
+  <uses-sdk android:minSdkVersion="16" />
+  <!--拍照上传需要照相机权限-->
+  <uses-permission android:name="android.permission.CAMERA" />
+  <!--上传已有图片的头像需要读取外部存储权限-->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <!-- AIHelp添加start -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- AIHelp添加end -->
+  <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+</manifest>
